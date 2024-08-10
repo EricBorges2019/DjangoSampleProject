@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.template import loader
 from django.http import Http404
 
@@ -22,14 +22,8 @@ def index(request):
     # the render will be returned!
 
 def details(request, question_id):
-    response = "Results for Question %s:"
-    try:
-        question = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404("Question doesn't exist!!!")
+    question = get_object_or_404(Question, pk=question_id)
     return render(request, "polls/detail.html", {"question": question})
-
-    return HttpResponse(response % question_id)
 
 def results(request, question_id):
     response = "You're looking at the results of Question %s:"
