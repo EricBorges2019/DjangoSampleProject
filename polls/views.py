@@ -3,7 +3,8 @@ from django.template import loader
 from django.http import Http404
 from django.db.models import F
 from django.urls import reverse
-from django.views import generic, timezone
+from django.views import generic
+from django.utils import timezone
 
 
 from .models import Question, Choice
