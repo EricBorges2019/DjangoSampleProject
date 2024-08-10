@@ -12,8 +12,11 @@ class Question(models.Model):
     def __str__(self): #
             return self.question_text
 
-    def was_recently_published(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
+
+        #update: it was a deliberate bug to explain testing... hate it
         #I don't like this solution
         #feels too "clever" for its own good
 class Choice(models.Model):
